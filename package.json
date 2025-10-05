@@ -1,0 +1,22 @@
+{
+  "name": "express_test",
+  "version": "1.0.0",
+  "description": "A test express project",
+  "main": "index.ts",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev" : "nodemon",
+    "build": "tsc",
+    "start": "node dist/src/index.ts"
+  },
+  "author": "Mustapha",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.6.2",
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2"
+  }
+}
