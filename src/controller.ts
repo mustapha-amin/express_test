@@ -23,7 +23,7 @@ function fetchMovies(req: Request, res: Response) {
 
 
 function uploadMovie(req: Request, res: Response) {
-    const movie : Movie = req.body;
+    const movie: Movie = req.body;
     if (!movie.id || !movie.title || !movie.director || !movie.year) {
         res.json({ "error": "missing parameter" })
     } else {
@@ -39,8 +39,8 @@ function uploadMovie(req: Request, res: Response) {
 }
 
 function updateMovie(req: Request, res: Response) {
-    const movie : Movie = req.body;
-     if (!movie.id || !movie.title || !movie.director || !movie.year) {
+    const movie: Movie = req.body;
+    if (!movie.id || !movie.title || !movie.director || !movie.year) {
         res.json({ "error": "missing parameter" })
     } else {
         let existingMovies = fetchMoviesFromFile()
@@ -55,4 +55,15 @@ function updateMovie(req: Request, res: Response) {
     }
 }
 
-export { userDisplay, search, findMovie, uploadMovie, fetchMovies, updateMovie }
+function deleteMovie(req: Request, res: Response) {
+    let existingMovies = fetchMoviesFromFile()
+    if(existingMovies.some((e) => e.id === req.params.id)) {
+        existingMovies = existingMovies.filter((movie) => movie.id !== req.params.id);
+        writeMoviesToFile(existingMovies);
+        res.json({"message" : "movie deleted"})
+    }  else {
+        res.json({"message" : "movie not found"})
+    }
+}
+
+export { userDisplay, search, findMovie, uploadMovie, fetchMovies, updateMovie, deleteMovie, }
