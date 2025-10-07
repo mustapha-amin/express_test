@@ -66,4 +66,10 @@ function deleteMovie(req: Request, res: Response) {
     }
 }
 
+function updateMoviePatch(req: Request, res: Response) {
+    let existingMovies = fetchMoviesFromFile()
+      
+} 
+  
+
 export { userDisplay, search, findMovie, uploadMovie, fetchMovies, updateMovie, deleteMovie, }

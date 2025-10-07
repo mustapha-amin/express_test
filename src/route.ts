@@ -15,4 +15,17 @@ router.get('/talkback/:name/:id', (req: express.Request, res: express.Response) 
     res.json({"message" : `You are ${req.params.name} with ID - ${req.params.id} `})
 })
 
+router.get('/talkback2/', (req: express.Request, res: express.Response) => {
+    const {name, id} = req.query
+    if(!name || !id) {
+        res.json({"message" : "Missing query"})
+    } else {
+        res.json({"message" : `You are ${name} with ID - ${id} `})
+    }
+})
+
+router.use((req : express.Request, res: express.Response) => {
+    res.json({"message" : "invalid route"})
+}) 
+
 export default router 
