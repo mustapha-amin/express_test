@@ -24,6 +24,11 @@ router.get('/talkback2/', (req: express.Request, res: express.Response) => {
     }
 })
 
+router.post('/form', (req: express.Request, res: express.Response)=>{
+    res.json({"message" : "form received"})
+    console.log(req.body)
+})
+
 router.use((req : express.Request, res: express.Response) => {
     res.json({"message" : "invalid route"})
 }) 

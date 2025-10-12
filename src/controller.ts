@@ -25,34 +25,34 @@ function fetchMovies(req: Request, res: Response) {
 function uploadMovie(req: Request, res: Response) {
     const movie: Movie = req.body;
     if (!movie.id || !movie.title || !movie.director || !movie.year) {
-        res.json({ "error": "missing parameter" })
-    } else {
-        let existingMovies = fetchMoviesFromFile()
-        if (existingMovies.some((e) => e.id.toString() === movie.id)) {
-            res.json({ "message": "movie already exists" })
-        } else {
-            existingMovies.push(req.body)
-            writeMoviesToFile(existingMovies)
-            res.json({ "message": "movie uploaded" })
-        }
+        return res.json({ "error": "missing parameter" })
     }
+    
+    let existingMovies = fetchMoviesFromFile()
+    if (existingMovies.some((e) => e.id.toString() === movie.id)) {
+        return res.json({ "message": "movie already exists" })
+    }
+    
+    existingMovies.push(req.body)
+    writeMoviesToFile(existingMovies)
+    res.json({ "message": "movie uploaded" })
 }
 
 function updateMovie(req: Request, res: Response) {
     const movie: Movie = req.body;
     if (!movie.id || !movie.title || !movie.director || !movie.year) {
-        res.json({ "error": "missing parameter" })
-    } else {
-        let existingMovies = fetchMoviesFromFile()
-        if (existingMovies.some((e) => e.id.toString() === req.params.id)) {
-            const index = existingMovies.findIndex((e) => e.id.toString() === req.params.id)
-            existingMovies[index] = req.body
-            writeMoviesToFile(existingMovies)
-            res.json({ "message": "movie updated" })
-        } else {
-            res.json({ "message": "movie not found" })
-        }
+        return res.json({ "error": "missing parameter" })
     }
+    
+    let existingMovies = fetchMoviesFromFile()
+    if (existingMovies.some((e) => e.id.toString() === req.params.id)) {
+        const index = existingMovies.findIndex((e) => e.id.toString() === req.params.id)
+        existingMovies[index] = req.body
+        writeMoviesToFile(existingMovies)
+        return res.json({ "message": "movie updated" })
+    }
+    
+    res.json({ "message": "movie not found" })
 }
 
 function deleteMovie(req: Request, res: Response) {
@@ -60,16 +60,17 @@ function deleteMovie(req: Request, res: Response) {
     if(existingMovies.some((e) => e.id === req.params.id)) {
         existingMovies = existingMovies.filter((movie) => movie.id !== req.params.id);
         writeMoviesToFile(existingMovies);
-        res.json({"message" : "movie deleted"})
-    }  else {
-        res.json({"message" : "movie not found"})
+        return res.json({"message" : "movie deleted"})
     }
+    
+    res.json({"message" : "movie not found"})
 }
 
 function updateMoviePatch(req: Request, res: Response) {
     let existingMovies = fetchMoviesFromFile()
       
 } 
+
   
 
 export { userDisplay, search, findMovie, uploadMovie, fetchMovies, updateMovie, deleteMovie, }
