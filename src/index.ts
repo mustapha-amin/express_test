@@ -12,6 +12,10 @@ app.use(logger)
 
 app.use('/api', router)
 
+app.use('*', (_ : express.Request, res: express.Response) => {
+    res.status(404).json({"message" : "invalid route"})
+}) 
+
 app.listen(port, () => {
     console.log(`express app running on port ${port}`)
 })

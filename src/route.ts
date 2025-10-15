@@ -29,8 +29,4 @@ router.post('/form', (req: express.Request, res: express.Response)=>{
     console.log(req.body)
 })
 
-router.use((req : express.Request, res: express.Response) => {
-    res.json({"message" : "invalid route"})
-}) 
-
 export default router 
