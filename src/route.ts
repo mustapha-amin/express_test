@@ -51,4 +51,22 @@ router.get('/set-cookie/:name', (req:Request, res:Response) => {
     })
 })
 
+
+router.get('/visit', (req:Request, res:Response) => {
+    if(req.session.views) {
+        if(req.session.views === 5) {
+            return req.session.destroy((err) => {
+                if(err) return res.send("Unable to clear session")
+                res.send("session destroyed")
+            })
+        }
+        req.session.views++;
+        res.send(`You have visited this page ${req.session.views} times`)
+    } else {
+        req.session.views = 1
+        res.send("You are visiting the page for the first time")
+    }
+})
+
+
 export default router 

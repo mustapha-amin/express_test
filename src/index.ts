@@ -16,7 +16,7 @@ app.use(cookieParser())
 app.use(session({
     secret:'test-secret',
     resave:false,
-    saveUninitialized:false
+    saveUninitialized:false,
 }))
 app.use('/api', router)
 app.use(invalidRoute)
