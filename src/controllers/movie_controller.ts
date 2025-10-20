@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import fs from "fs";
-import type { Movie } from "./models.ts";
-import { fetchMoviesFromFile, writeMoviesToFile } from "./movie_handlers.ts";
+import type { Movie } from "../models/movie.ts";
+import { fetchMoviesFromFile, writeMoviesToFile } from "../movie_handlers.ts";
 
 function userDisplay(req: Request, res: Response) {
     res.status(200).json(`Hello, ${req.params.username}`)

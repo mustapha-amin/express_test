@@ -1,5 +1,5 @@
 import fs from "fs"
-import type { Movie } from "./models.ts";
+import type { Movie } from "./models/movie.ts";
 import path from "path";
 import { fileURLToPath } from "url";
 
